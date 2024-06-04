@@ -6,7 +6,7 @@
 /*   By: mhiguera <mhiguera@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 19:00:40 by mhiguera          #+#    #+#             */
-/*   Updated: 2024/05/28 20:02:35 by mhiguera         ###   ########.fr       */
+/*   Updated: 2024/06/04 12:09:00 by mhiguera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,21 @@ void child_processing(int argc, char **argv, int end[2])
         char *cmd1[] = {argv[2], NULL};
         execve(cmd1[0], cmd1, NULL);
         error_and_exit("execve cmd1");
+}
+
+char **get_path(char **envp)
+{
+    int i;
+    char *tmp;
+    char **paths;
+
+    tmp = NULL;
+    if (!envp)
+        return (NULL);
+    i = -1;
+    while (envp[i] != NULL)
+    {
+        i++;
+        if (!)
+    }
 }
