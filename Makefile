@@ -6,7 +6,7 @@
 #    By: mhiguera <mhiguera@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 12:09:52 by mhiguera          #+#    #+#              #
-#    Updated: 2024/06/04 12:13:04 by mhiguera         ###   ########.fr        #
+#    Updated: 2024/07/09 12:13:28 by mhiguera         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,17 +28,18 @@ all: $(NAME)
 .SILENT: $(OBJS) $(FT_PRINTF)
 
 $(NAME): $(OBJS)
-	@make -C $(LIBFT_DIR)
-	@gcc $(FLAGS) $(OBJS) $(LIBFT_DIR)$(LIBFT_A) -o $(NAME)
+	@make -C $(LIBFT_DIR) --no-print-directory
+	@gcc $(FLAGS) -no-pie  $(OBJS) $(LIBFT_DIR)$(LIBFT_A) -o $(NAME)
 
 clean:
-	@$(RM) $(OBJS) $(LIBFT)
-	@make clean -C $(LIBFT_DIR)
+	@$(RM) $(OBJS)
+	@make -C $(LIBFT_DIR) clean --no-print-directory
 
-fclean:	clean
-	@make fclean -C $(LIBFT_DIR)
-	@$(RM) $(NAME) $(OBJS)
+fclean: clean
+	@make -C $(LIBFT_DIR) fclean --no-print-directory
+	@$(RM) $(NAME)
 
-re:	fclean all
-	
-.PHONY:	all clean fclean re
+re: fclean all
+
+.PHONY: all clean fclean re
+
