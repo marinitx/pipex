@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhiguera <mhiguera@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mhiguera <mhiguera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 19:51:45 by mhiguera          #+#    #+#             */
-/*   Updated: 2024/07/09 13:17:45 by mhiguera         ###   ########.fr       */
+/*   Updated: 2024/09/29 16:27:16 by mhiguera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include <sys/wait.h>
 # include <sys/types.h>
 
-void	parent_processing(int argc, char **argv, int end[2], char **envp);
-void	child_processing(int argc, char **argv, int end[2], char **envp);
+void	second_child(int argc, char **argv, int end[2], char **envp);
+void	first_child(int argc, char **argv, int end[2], char **envp);
 int		main(int argc, char **argv, char **envp);
 void	error_and_exit(const char *msg);
 char	**get_paths(char **envp);

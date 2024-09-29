@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhiguera <mhiguera@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mhiguera <mhiguera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 19:00:40 by mhiguera          #+#    #+#             */
-/*   Updated: 2024/07/09 14:20:32 by mhiguera         ###   ########.fr       */
+/*   Updated: 2024/09/29 16:27:16 by mhiguera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/pipex.h"
 
-void	parent_processing(int argc, char **argv, int end[2], char **envp)
+void	second_child(int argc, char **argv, int end[2], char **envp)
 {
 	int	outfile;
 
@@ -28,7 +28,7 @@ void	parent_processing(int argc, char **argv, int end[2], char **envp)
 	get_cmd(argv[3], envp);
 }
 
-void	child_processing(int argc, char **argv, int end[2], char **envp)
+void	first_child(int argc, char **argv, int end[2], char **envp)
 {
 	int	infile;
 
