@@ -6,7 +6,7 @@
 /*   By: mhiguera <mhiguera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:59:00 by mhiguera          #+#    #+#             */
-/*   Updated: 2024/09/29 16:27:16 by mhiguera         ###   ########.fr       */
+/*   Updated: 2024/10/03 13:59:25 by mhiguera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int	main(int argc, char **argv, char **envp)
 	pid_t	pid1;
 	pid_t	pid2;
 
-	if (argc > 5)
-		return (write(2, "Error: too many parameters\n", 27), 1);
+	if (argc != 5)
+		return (write(2, "Error: that's not 4 parameters!\n", 32), 1);
 	if (pipe(end) == -1)
 		error_and_exit("pipe");
 	pid1 = fork();
@@ -34,6 +34,7 @@ int	main(int argc, char **argv, char **envp)
 	if (pid1 == 0)
 		first_child(argc, argv, end, envp);
 	pid2 = fork();
+	printf("NO DEBERÍA LLEGAR\n");
 	if (pid2 == -1)
 		error_and_exit("fork");
 	if (pid2 == 0)

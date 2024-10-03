@@ -6,7 +6,7 @@
 /*   By: mhiguera <mhiguera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 19:00:40 by mhiguera          #+#    #+#             */
-/*   Updated: 2024/09/29 16:27:16 by mhiguera         ###   ########.fr       */
+/*   Updated: 2024/10/03 08:34:36 by mhiguera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ char	*get_route(char **possible_paths, char *cmd)
 		}
 		possible_paths++;
 	}
+	// if (!route && access(cmd, F_OK | X_OK) == 0)
+	// 	return (cmd);
 	return (route);
 }
 
