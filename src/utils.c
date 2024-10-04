@@ -6,7 +6,7 @@
 /*   By: mhiguera <mhiguera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 19:00:40 by mhiguera          #+#    #+#             */
-/*   Updated: 2024/10/03 08:34:36 by mhiguera         ###   ########.fr       */
+/*   Updated: 2024/10/04 09:03:57 by mhiguera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	second_child(int argc, char **argv, int end[2], char **envp)
 	if (dup2(outfile, STDOUT_FILENO) == -1)
 		error_and_exit("dup2 outfile");
 	close(end[0]);
+	close (outfile);
 	get_cmd(argv[3], envp);
 }
 
@@ -41,6 +42,7 @@ void	first_child(int argc, char **argv, int end[2], char **envp)
 	if (dup2(end[1], STDOUT_FILENO) == -1)
 		error_and_exit("dup2 end[1]");
 	close(end[1]);
+	close(infile);
 	get_cmd(argv[2], envp);
 }
 
@@ -51,18 +53,22 @@ char	**get_paths(char **envp)
 	char	**paths;
 
 	tmp = NULL;
+	paths = NULL;
 	i = 0;
 	if (!envp)
 		return (NULL);
 	while (envp[i] != NULL)
 	{
 		if (!ft_strncmp("PATH=", envp[i], 5))
+		{
 			tmp = (&envp[i][5]);
+			paths = ft_split(tmp, ':');
+			break ;
+		}
 		i++;
 	}
 	if (!tmp)
 		return (NULL);
-	paths = ft_split(tmp, ':');
 	return (paths);
 }
 
@@ -71,23 +77,21 @@ char	*get_route(char **possible_paths, char *cmd)
 	char	*route;
 	char	*tmp;
 
-	if (access(cmd, F_OK | X_OK) == 0)
-		return (cmd);
 	while (*possible_paths)
 	{
 		tmp = ft_strjoin(*possible_paths, "/");
 		route = ft_strjoin(tmp, cmd);
-		if (access(route, F_OK) != -1 && access(route, X_OK) != -1)
-			break ;
-		else
+		if (access(route, F_OK | X_OK) == 0)
 		{
-			free(tmp);
-			free(route);
+			if (cmd[0] == '.' && cmd[1] == '/')
+				return ft_strdup(cmd);
+			free (tmp);
+			return (route);
 		}
+		free(tmp);
+		free(route);
 		possible_paths++;
 	}
-	// if (!route && access(cmd, F_OK | X_OK) == 0)
-	// 	return (cmd);
 	return (route);
 }
 
@@ -100,6 +104,9 @@ void	get_cmd(char *argv, char **envp)
 	cmd = ft_split(argv, ' ');
 	possible_paths = get_paths(envp);
 	route = get_route(possible_paths, cmd[0]);
+	if (route == NULL)
+		error_and_exit("route");
 	if (execve(route, cmd, envp) == -1)
 		error_and_exit("execve");
+	free(route);
 }

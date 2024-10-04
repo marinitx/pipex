@@ -6,7 +6,7 @@
 /*   By: mhiguera <mhiguera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:59:00 by mhiguera          #+#    #+#             */
-/*   Updated: 2024/10/03 13:59:25 by mhiguera         ###   ########.fr       */
+/*   Updated: 2024/10/04 08:51:03 by mhiguera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	main(int argc, char **argv, char **envp)
 	if (pid1 == 0)
 		first_child(argc, argv, end, envp);
 	pid2 = fork();
-	printf("NO DEBERÍA LLEGAR\n");
 	if (pid2 == -1)
 		error_and_exit("fork");
 	if (pid2 == 0)
