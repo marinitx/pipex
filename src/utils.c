@@ -6,7 +6,7 @@
 /*   By: mhiguera <mhiguera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 19:00:40 by mhiguera          #+#    #+#             */
-/*   Updated: 2024/10/04 09:03:57 by mhiguera         ###   ########.fr       */
+/*   Updated: 2024/10/08 18:44:10 by mhiguera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ char	*get_route(char **possible_paths, char *cmd)
 		if (access(route, F_OK | X_OK) == 0)
 		{
 			if (cmd[0] == '.' && cmd[1] == '/')
-				return ft_strdup(cmd);
+				return (ft_strdup(cmd));
 			free (tmp);
 			return (route);
 		}
