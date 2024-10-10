@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhiguera <mhiguera@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mhiguera <mhiguera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 19:00:40 by mhiguera          #+#    #+#             */
-/*   Updated: 2024/10/10 19:08:36 by mhiguera         ###   ########.fr       */
+/*   Updated: 2024/10/10 19:17:22 by mhiguera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,12 @@ char	*get_route(char **possible_paths, char *cmd)
 	char	*tmp;
 
 	if (cmd[0] == '/' || (cmd[0] == '.' && cmd[1] == '/'))
-		return (access(cmd, F_OK | X_OK) == 0 ? ft_strdup(cmd) : NULL);
+	{
+		if (access(cmd, F_OK | X_OK) == 0)
+			return (ft_strdup(cmd));
+		else
+			return (NULL);
+	}
 	while (possible_paths && *possible_paths)
 	{
 		tmp = ft_strjoin(*possible_paths, "/");
@@ -95,7 +100,6 @@ char	*get_route(char **possible_paths, char *cmd)
 	write(2, "pipex: command not found\n", 25);
 	return (NULL);
 }
-
 
 void	get_cmd(char *argv, char **envp, int end[2])
 {
