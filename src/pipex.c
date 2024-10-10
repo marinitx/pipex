@@ -6,7 +6,7 @@
 /*   By: mhiguera <mhiguera@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:59:00 by mhiguera          #+#    #+#             */
-/*   Updated: 2024/10/10 18:21:43 by mhiguera         ###   ########.fr       */
+/*   Updated: 2024/10/10 18:51:17 by mhiguera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	error_and_exit(int end[2])
 {
 	close(end[0]);
 	close(end[1]);
-	perror("error: ");
+	perror("error:  ");
 	exit(EXIT_FAILURE);
 }
 

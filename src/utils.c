@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhiguera <mhiguera@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mhiguera <mhiguera@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 19:00:40 by mhiguera          #+#    #+#             */
-/*   Updated: 2024/10/10 18:38:17 by mhiguera         ###   ########.fr       */
+/*   Updated: 2024/10/10 19:08:36 by mhiguera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ void	first_child(int argc, char **argv, int end[2], char **envp)
 	close(end[0]);
 	infile = open(argv[1], O_RDONLY);
 	if (infile == -1)
-		error_and_exit(end);
+	{
+		write(2, "pipex: no such file or directory\n", 33);
+		exit(0);
+	}
 	if (dup2(infile, STDIN_FILENO) == -1)
 		error_and_exit(end);
 	if (dup2(end[1], STDOUT_FILENO) == -1)
@@ -76,29 +79,23 @@ char	*get_route(char **possible_paths, char *cmd)
 {
 	char	*route;
 	char	*tmp;
-	int		entered;
 
-	entered = 0;
+	if (cmd[0] == '/' || (cmd[0] == '.' && cmd[1] == '/'))
+		return (access(cmd, F_OK | X_OK) == 0 ? ft_strdup(cmd) : NULL);
 	while (possible_paths && *possible_paths)
 	{
 		tmp = ft_strjoin(*possible_paths, "/");
 		route = ft_strjoin(tmp, cmd);
-		if (access(route, F_OK | X_OK) == 0)
-		{
-			if (cmd[0] == '.' && cmd[1] == '/')
-				return (ft_strdup(cmd));
-			entered = 1;
-			free (tmp);
-			return (route);
-		}
 		free(tmp);
+		if (access(route, F_OK | X_OK) == 0)
+			return (route);
 		free(route);
 		possible_paths++;
 	}
-	if (entered == 0)
-		return (write(2, "pipex: command not found\n", 25), NULL);
-	return (route);
+	write(2, "pipex: command not found\n", 25);
+	return (NULL);
 }
+
 
 void	get_cmd(char *argv, char **envp, int end[2])
 {
