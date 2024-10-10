@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mhiguera <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: mhiguera <mhiguera@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/09 13:19:19 by mhiguera          #+#    #+#              #
-#    Updated: 2024/07/09 13:19:21 by mhiguera         ###   ########.fr        #
+#    Updated: 2024/10/10 18:24:23 by mhiguera         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ SRC = ./src/pipex.c ./src/utils.c
 
 OBJS = $(SRC:.c=.o)
 C = gcc
-FLAGS = -Wall -Wextra -Werror #-g3 -fsanitize=address
+FLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 NAME = pipex
 RM = rm -rf
 
@@ -29,7 +29,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@make -C $(LIBFT_DIR) --no-print-directory
-	@gcc $(FLAGS) -no-pie  $(OBJS) $(LIBFT_DIR)$(LIBFT_A) -o $(NAME)
+	@gcc $(FLAGS) $(OBJS) $(LIBFT_DIR)$(LIBFT_A) -o $(NAME)
 
 clean:
 	@$(RM) $(OBJS)
