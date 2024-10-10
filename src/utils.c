@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhiguera <mhiguera@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mhiguera <mhiguera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 19:00:40 by mhiguera          #+#    #+#             */
-/*   Updated: 2024/10/10 18:24:20 by mhiguera         ###   ########.fr       */
+/*   Updated: 2024/10/10 18:38:17 by mhiguera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ char	**get_paths(char **envp)
 		i++;
 	}
 	if (!envp[i])
-		return NULL;
+		return (NULL);
 	if (!tmp)
-		return NULL;
+		return (NULL);
 	return (paths);
 }
 
